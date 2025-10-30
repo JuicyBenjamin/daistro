@@ -1,0 +1,60 @@
+---
+// Component progress tracking
+const actions = { completed: 1, total: 6 };
+const dataDisplay = { completed: 0, total: 16 };
+const navigation = { completed: 0, total: 8 };
+const feedback = { completed: 0, total: 7 };
+const dataInput = { completed: 0, total: 14 };
+const layout = { completed: 0, total: 8 };
+const mockup = { completed: 0, total: 4 };
+
+// Calculate percentages
+const calculatePercentage = (completed: number, total: number) => Math.round((completed / total) * 100);
+
+// Calculate overall totals
+const totalCompleted = actions.completed + dataDisplay.completed + navigation.completed + feedback.completed + dataInput.completed + layout.completed + mockup.completed;
+const totalComponents = actions.total + dataDisplay.total + navigation.total + feedback.total + dataInput.total + layout.total + mockup.total;
+const overallPercentage = calculatePercentage(totalCompleted, totalComponents);
+
+// Component data array for easy iteration
+const components = [
+  { name: 'Actions', data: actions },
+  { name: 'Data display', data: dataDisplay },
+  { name: 'Navigation', data: navigation },
+  { name: 'Feedback', data: feedback },
+  { name: 'Data input', data: dataInput },
+  { name: 'Layout', data: layout },
+  { name: 'Mockup', data: mockup }
+];
+---
+
+
+<div class="daistro-progress">
+
+  <h3>Overall Progress</h3>
+
+  <progress class="progress w-full" value={totalCompleted} max={totalComponents}></progress>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 *:mt-0!">
+    {components.map((component) => {
+      const percentage = calculatePercentage(component.data.completed, component.data.total);
+      return (
+        <div class="bg-base-100 shadow rounded-lg p-4 flex items-center gap-3">
+          <div class="flex-1">
+            <div class="stat-title text-sm">{component.name}</div>
+            <div class="stat-value text-lg">{component.data.completed}/{component.data.total}</div>
+            <div class="stat-desc text-xs">{component.data.total - component.data.completed} remaining</div>
+          </div>
+          <div
+            class="radial-progress"
+            style={`--value:${percentage};`}
+            aria-valuenow={percentage}
+            role="progressbar"
+          >
+            {percentage}%
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</div>
