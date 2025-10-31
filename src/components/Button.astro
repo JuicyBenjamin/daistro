@@ -1,0 +1,68 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { tv, type VariantProps } from 'tailwind-variants';
+
+interface Props
+  extends Omit<
+      HTMLAttributes<'button'>,
+      'color' | 'style' | 'size' | 'modifier'
+    >,
+    Omit<HTMLAttributes<'a'>, 'type' | 'color' | 'style' | 'size' | 'modifier'>,
+    VariantProps<typeof button> {}
+
+const {
+  color,
+  style,
+  size,
+  modifier,
+  class: className,
+  href,
+  ...rest
+} = Astro.props;
+
+export const button = tv({
+  base: 'btn',
+  variants: {
+    color: {
+      neutral: 'btn-neutral',
+      primary: 'btn-primary',
+      secondary: 'btn-secondary',
+      info: 'btn-info',
+      success: 'btn-success',
+      warning: 'btn-warning',
+      error: 'btn-error',
+      accent: 'btn-accent',
+    },
+    style: {
+      outline: 'btn-outline',
+      dash: 'btn-dash',
+      soft: 'btn-soft',
+      ghost: 'btn-ghost',
+      link: 'btn-link',
+    },
+    size: {
+      xs: 'btn-xs',
+      sm: 'btn-sm',
+      md: 'btn-md',
+      lg: 'btn-lg',
+      xl: 'btn-xl',
+    },
+    modifier: {
+      wide: 'btn-wide',
+      block: 'btn-block',
+      square: 'btn-square',
+      circle: 'btn-circle',
+    },
+  },
+});
+
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  class={button({ color, style, size, modifier, class: className })}
+  data-slot="button"
+  {...rest}
+>
+  <slot />
+</Tag>
