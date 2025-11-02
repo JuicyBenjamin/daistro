@@ -1,0 +1,424 @@
+---
+title: 'Dropdown'
+description: 'yolo'
+---
+
+import Dropdown from '@/components/dropdown/Dropdown.astro';
+import DropdownTrigger from '@/components/dropdown/DropdownTrigger.astro';
+import DropdownContent from '@/components/dropdown/DropdownContent.astro';
+import DropdownContentString from '@/components/dropdown/DropdownContent.astro?raw';
+import { Code } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The Dropdown component provides a flexible dropdown menu using the Popover API. The component
+consists of three parts:
+
+- **Dropdown**: The parent component that handles the popover functionality (requires no props)
+- **DropdownTrigger**: The button that opens/closes the dropdown. Accepts all
+  [Button props](/docs/components/actions/button) (`color`, `style`, `size`, `modifier`, etc.)
+- **DropdownContent**: The dropdown menu content with the following props:
+  - `as`: The HTML element to render (`'ul'`, `'ol'`, or `'div'`). Defaults to `'ul'`
+  - `placement`: Where the dropdown appears relative to the trigger (`'top'`, `'bottom'`, `'left'`,
+    `'right'`). Defaults to `'bottom'`
+  - `alignment`: How the dropdown aligns to the trigger (`'start'`, `'center'`, `'end'`). Defaults
+    to `'center'`
+
+### Dropdown
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="flex gap-2 justify-center not-content">
+      <Dropdown>
+        <DropdownTrigger>Click me</DropdownTrigger>
+        <DropdownContent>
+          <li>
+            <a>Item 1</a>
+          </li>
+          <li>
+            <a>Item 2</a>
+          </li>
+          <li>
+            <a>Item 3</a>
+          </li>
+        </DropdownContent>
+      </Dropdown>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Dropdown>
+      <DropdownTrigger>Click me</DropdownTrigger>
+      <DropdownContent>
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+    `}
+      language="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### Placement
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="flex gap-2 justify-center items-center flex-wrap not-content">
+      <Dropdown>
+        <DropdownTrigger>Bottom</DropdownTrigger>
+        <DropdownContent placement="bottom">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+      <Dropdown>
+        <DropdownTrigger>Top</DropdownTrigger>
+        <DropdownContent placement="top">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+      <Dropdown>
+        <DropdownTrigger>Left</DropdownTrigger>
+        <DropdownContent placement="left">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+      <Dropdown>
+        <DropdownTrigger>Right</DropdownTrigger>
+        <DropdownContent placement="right">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Dropdown>
+      <DropdownTrigger>Bottom</DropdownTrigger>
+      <DropdownContent placement="bottom">
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+
+    <Dropdown>
+      <DropdownTrigger>Top</DropdownTrigger>
+      <DropdownContent placement="top">
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+
+    <Dropdown>
+      <DropdownTrigger>Left</DropdownTrigger>
+      <DropdownContent placement="left">
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+
+    <Dropdown>
+      <DropdownTrigger>Right</DropdownTrigger>
+      <DropdownContent placement="right">
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+    `}
+      language="astro"
+    />
+
+  </TabItem>
+</Tabs>
+
+### Alignment
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="flex gap-10 justify-center items-center flex-wrap not-content">
+      <Dropdown>
+        <DropdownTrigger>Start</DropdownTrigger>
+        <DropdownContent alignment="start">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+      <Dropdown>
+        <DropdownTrigger>Center</DropdownTrigger>
+        <DropdownContent alignment="center">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+      <Dropdown>
+        <DropdownTrigger>End</DropdownTrigger>
+        <DropdownContent alignment="end">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Dropdown>
+      <DropdownTrigger>Start</DropdownTrigger>
+      <DropdownContent alignment="start">
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+
+    <Dropdown>
+      <DropdownTrigger>Center</DropdownTrigger>
+      <DropdownContent alignment="center">
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+
+    <Dropdown>
+      <DropdownTrigger>End</DropdownTrigger>
+      <DropdownContent alignment="end">
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+    `}
+      language="astro"
+    />
+
+  </TabItem>
+</Tabs>
+
+### As element type
+
+The `as` prop allows you to choose which HTML element renders the dropdown content. Use `'ul'` for
+unordered lists (default), `'ol'` for ordered lists, or `'div'` for custom containers.
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="flex gap-2 justify-center items-center flex-wrap not-content">
+      <Dropdown>
+        <DropdownTrigger>As UL</DropdownTrigger>
+        <DropdownContent>
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+      <Dropdown>
+        <DropdownTrigger>As OL</DropdownTrigger>
+        <DropdownContent as="ol">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+      <Dropdown>
+        <DropdownTrigger>As DIV</DropdownTrigger>
+        <DropdownContent as="div">
+          <div class="p-2">
+            <div><a>Item 1</a></div>
+            <div><a>Item 2</a></div>
+            <div><a>Item 3</a></div>
+          </div>
+        </DropdownContent>
+      </Dropdown>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Dropdown>
+      <DropdownTrigger>As UL</DropdownTrigger>
+      <DropdownContent>
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+
+    <Dropdown>
+      <DropdownTrigger>As OL</DropdownTrigger>
+      <DropdownContent as="ol">
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+
+    <Dropdown>
+      <DropdownTrigger>As DIV</DropdownTrigger>
+      <DropdownContent as="div">
+        <div class="p-2">
+          <div><a>Item 1</a></div>
+          <div><a>Item 2</a></div>
+          <div><a>Item 3</a></div>
+        </div>
+      </DropdownContent>
+    </Dropdown>
+    `}
+      language="astro"
+    />
+
+  </TabItem>
+</Tabs>
+
+### Combining placement and alignment
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="flex gap-2 justify-center items-center flex-wrap not-content">
+      <Dropdown>
+        <DropdownTrigger>Top Start</DropdownTrigger>
+        <DropdownContent placement="top" alignment="start">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+      <Dropdown>
+        <DropdownTrigger>Right End</DropdownTrigger>
+        <DropdownContent placement="right" alignment="end">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+      <Dropdown>
+        <DropdownTrigger>Left Center</DropdownTrigger>
+        <DropdownContent placement="left" alignment="center">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Dropdown>
+      <DropdownTrigger>Top Start</DropdownTrigger>
+      <DropdownContent placement="top" alignment="start">
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+
+    <Dropdown>
+      <DropdownTrigger>Right End</DropdownTrigger>
+      <DropdownContent placement="right" alignment="end">
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+
+    <Dropdown>
+      <DropdownTrigger>Left Center</DropdownTrigger>
+      <DropdownContent placement="left" alignment="center">
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+    `}
+      language="astro"
+    />
+
+  </TabItem>
+</Tabs>
+
+### With custom trigger button styles
+
+The `DropdownTrigger` accepts all [Button props](/docs/components/actions/button), allowing you to
+style the trigger button just like any other button.
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="flex gap-2 justify-center items-center flex-wrap not-content">
+      <Dropdown>
+        <DropdownTrigger color="primary">Primary Button</DropdownTrigger>
+        <DropdownContent>
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+      <Dropdown>
+        <DropdownTrigger color="error" style="outline">Error Outline</DropdownTrigger>
+        <DropdownContent>
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+      <Dropdown>
+        <DropdownTrigger style="ghost" size="sm">Ghost Small</DropdownTrigger>
+        <DropdownContent>
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </DropdownContent>
+      </Dropdown>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Dropdown>
+      <DropdownTrigger color="primary">Primary Button</DropdownTrigger>
+      <DropdownContent>
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+
+    <Dropdown>
+      <DropdownTrigger color="error" style="outline">Error Outline</DropdownTrigger>
+      <DropdownContent>
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+
+    <Dropdown>
+      <DropdownTrigger style="ghost" size="sm">Ghost Small</DropdownTrigger>
+      <DropdownContent>
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </DropdownContent>
+    </Dropdown>
+    `}
+      language="astro"
+    />
+
+  </TabItem>
+</Tabs>
