@@ -1,0 +1,34 @@
+---
+import { parseHTML } from 'linkedom'; // npm i linkedom
+
+const { id: explicitId } = Astro.props;
+const popoverId = explicitId ?? `popover-${crypto.randomUUID()}`;
+const anchorName = `--anchor-${popoverId}`;
+
+// Render consumer HTML
+const raw = await Astro.slots.render('default');
+const { document } = parseHTML(raw);
+
+// Find trigger/content parts
+const triggerEl = document.querySelector('[data-dropdown-part="trigger"]');
+const contentEl = document.querySelector('[data-dropdown-part="content"]');
+
+if (triggerEl && contentEl) {
+  // inject Popover API attributes
+  triggerEl.setAttribute('popovertarget', popoverId);
+  triggerEl.setAttribute('style', `anchor-name:${anchorName}`);
+  contentEl.setAttribute('id', popoverId);
+  contentEl.setAttribute('popover', '');
+  contentEl.setAttribute('style', `position-anchor:${anchorName}`);
+}
+
+// Cleanup (optional)
+triggerEl?.removeAttribute('data-dropdown-part');
+contentEl?.removeAttribute('data-dropdown-part');
+
+const triggerHTML = triggerEl?.outerHTML ?? '';
+const contentHTML = contentEl?.outerHTML ?? '';
+---
+
+<Fragment set:html={triggerHTML} />
+<Fragment set:html={contentHTML} />

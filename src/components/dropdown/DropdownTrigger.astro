@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import type { VariantProps } from 'tailwind-variants';
+import { button } from '../Button.astro';
+
+interface Props
+  extends Omit<
+      HTMLAttributes<'button'>,
+      'color' | 'style' | 'size' | 'modifier'
+    >,
+    VariantProps<typeof button> {}
+
+const { color, style, size, modifier, class: className, ...rest } = Astro.props;
+---
+
+<button
+  {...rest}
+  class={button({ color, style, size, modifier, class: className })}
+  data-dropdown-part="trigger"
+>
+  <slot />
+</button>

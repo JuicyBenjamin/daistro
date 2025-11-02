@@ -35,7 +35,10 @@ export default defineConfig({
           items: [
             {
               label: 'Actions',
-              items: [{ label: 'Button', slug: 'components/actions/button' }],
+              items: [
+                { label: 'Button', slug: 'components/actions/button' },
+                { label: 'Dropdown', slug: 'components/actions/dropdown' },
+              ],
             },
           ],
         },
