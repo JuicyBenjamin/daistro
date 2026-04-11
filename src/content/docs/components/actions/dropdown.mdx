@@ -6,6 +6,8 @@ description: 'yolo'
 import Dropdown from '@/components/dropdown/Dropdown.astro';
 import DropdownTrigger from '@/components/dropdown/DropdownTrigger.astro';
 import DropdownContent from '@/components/dropdown/DropdownContent.astro';
+import DropdownString from '@/components/dropdown/Dropdown.astro?raw';
+import DropdownTriggerString from '@/components/dropdown/DropdownTrigger.astro?raw';
 import DropdownContentString from '@/components/dropdown/DropdownContent.astro?raw';
 import { Code } from '@astrojs/starlight/components';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -420,5 +422,19 @@ style the trigger button just like any other button.
       language="astro"
     />
 
+  </TabItem>
+</Tabs>
+
+### Source
+
+<Tabs>
+  <TabItem label="Dropdown">
+    <Code code={DropdownString} lang="astro" />
+  </TabItem>
+  <TabItem label="DropdownTrigger">
+    <Code code={DropdownTriggerString} lang="astro" />
+  </TabItem>
+  <TabItem label="DropdownContent">
+    <Code code={DropdownContentString} lang="astro" />
   </TabItem>
 </Tabs>

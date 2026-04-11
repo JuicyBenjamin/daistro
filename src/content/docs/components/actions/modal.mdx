@@ -7,6 +7,10 @@ import Modal from '@/components/modal/Modal.astro';
 import ModalBox from '@/components/modal/ModalBox.astro';
 import ModalActions from '@/components/modal/ModalActions.astro';
 import ModalClose from '@/components/modal/ModalClose.astro';
+import ModalString from '@/components/modal/Modal.astro?raw';
+import ModalBoxString from '@/components/modal/ModalBox.astro?raw';
+import ModalActionsString from '@/components/modal/ModalActions.astro?raw';
+import ModalCloseString from '@/components/modal/ModalClose.astro?raw';
 import Button from '@/components/Button.astro';
 import { Code } from '@astrojs/starlight/components';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -279,5 +283,22 @@ Pass utility classes on **`ModalBox`**.
     `}
       lang="astro"
     />
+  </TabItem>
+</Tabs>
+
+### Source
+
+<Tabs>
+  <TabItem label="Modal">
+    <Code code={ModalString} lang="astro" />
+  </TabItem>
+  <TabItem label="ModalBox">
+    <Code code={ModalBoxString} lang="astro" />
+  </TabItem>
+  <TabItem label="ModalActions">
+    <Code code={ModalActionsString} lang="astro" />
+  </TabItem>
+  <TabItem label="ModalClose">
+    <Code code={ModalCloseString} lang="astro" />
   </TabItem>
 </Tabs>
