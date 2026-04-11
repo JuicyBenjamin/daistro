@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { tv, type VariantProps } from 'tailwind-variants';
+import { button } from '../Button.astro';
+
+interface Props
+  extends Omit<
+      HTMLAttributes<'div'>,
+      'color' | 'style' | 'size' | 'modifier'
+    >,
+    VariantProps<typeof button> {}
+
+const fabTrigger = tv({
+  extend: button,
+  defaultVariants: {
+    color: 'primary',
+    size: 'lg',
+    modifier: 'circle',
+  },
+});
+
+const { color, style, size, modifier, class: className, ...rest } = Astro.props;
+---
+
+<div
+  tabindex="0"
+  role="button"
+  class={fabTrigger({ color, style, size, modifier, class: className })}
+  data-slot="fab-trigger"
+  {...rest}
+>
+  <slot />
+</div>

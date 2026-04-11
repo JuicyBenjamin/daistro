@@ -1,0 +1,31 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { tv, type VariantProps } from 'tailwind-variants';
+import { button } from '../Button.astro';
+
+interface Props
+  extends Omit<
+      HTMLAttributes<'span'>,
+      'color' | 'style' | 'size' | 'modifier'
+    >,
+    VariantProps<typeof button> {}
+
+const fabMark = tv({
+  extend: button,
+  defaultVariants: {
+    color: 'primary',
+    size: 'lg',
+    modifier: 'circle',
+  },
+});
+
+const { color, style, size, modifier, class: className, ...rest } = Astro.props;
+---
+
+<span
+  class={fabMark({ color, style, size, modifier, class: className })}
+  data-slot="fab-mark"
+  {...rest}
+>
+  <slot />
+</span>

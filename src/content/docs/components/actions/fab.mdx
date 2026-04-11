@@ -1,0 +1,351 @@
+---
+title: 'Fab'
+description: 'Floating action button and speed dial, matching daisyUI FAB patterns.'
+---
+
+import Fab from '@/components/fab/Fab.astro';
+import FabTrigger from '@/components/fab/FabTrigger.astro';
+import FabAction from '@/components/fab/FabAction.astro';
+import FabClose from '@/components/fab/FabClose.astro';
+import FabMainAction from '@/components/fab/FabMainAction.astro';
+import FabMark from '@/components/fab/FabMark.astro';
+import Button from '@/components/Button.astro';
+import { Code } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+[daisyUI FAB](https://daisyui.com/components/fab/) — speed dial (stacked) or **flower** (quarter circle). **`FabTrigger`** → optional **`FabClose`** or **`FabMainAction`** (not both) → **`FabAction`**s.
+
+**`fab-preview`** only in these docs so the demo isn’t full-viewport. **daisyUI ≥ 5.5** for `fab` styles.
+
+- **`Fab`** — Root; **`flower`** for flower layout. Styling lives on **`FabTrigger`** / **`FabAction`**.
+- **`FabTrigger`** — First. [Button](/docs/components/actions/button) props.
+- **`FabClose`** / **`FabMainAction`** — Optional; one or neither.
+- **`FabAction`** — Dial item; optional `label` (beside the icon on circle actions). **`modifier="circle"`** by default; **`modifier="text"`** for full text in the button (no **`btn-circle`**).
+- **`FabMark`** — ✕ inside **`FabClose`**; [Button](/docs/components/actions/button) props.
+- **`variant="single"`** — No dial; [Button](/docs/components/actions/button) props on **`Fab`**.
+
+### Speed dial (vertical)
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="fab-preview flex gap-2 justify-center not-content min-h-48 items-end pb-4">
+      <Fab>
+        <FabTrigger color="primary">F</FabTrigger>
+        <FabAction>A</FabAction>
+        <FabAction>B</FabAction>
+        <FabAction>C</FabAction>
+      </Fab>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Fab>
+      <FabTrigger color="primary">F</FabTrigger>
+      <FabAction>A</FabAction>
+      <FabAction>B</FabAction>
+      <FabAction>C</FabAction>
+    </Fab>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### With labels
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="fab-preview flex gap-2 justify-center not-content min-h-48 items-end pb-4">
+      <Fab>
+        <FabTrigger color="success">F</FabTrigger>
+        <FabAction label="Label B">
+          A
+        </FabAction>
+        <FabAction label="Label C">
+          B
+        </FabAction>
+        <FabAction label="Label D">
+          C
+        </FabAction>
+      </Fab>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Fab>
+      <FabTrigger color="success">F</FabTrigger>
+      <FabAction label="Label B">
+        A
+      </FabAction>
+      <FabAction label="Label C">
+        B
+      </FabAction>
+      <FabAction label="Label D">
+        C
+      </FabAction>
+    </Fab>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### Text actions
+
+**`modifier="text"`** — wide **`btn`**, text in the slot (not the `label` prop).
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="fab-preview flex gap-2 justify-center not-content min-h-48 items-end pb-4">
+      <Fab>
+        <FabTrigger color="primary">F</FabTrigger>
+        <FabAction modifier="text">Button A</FabAction>
+        <FabAction modifier="text">Button B</FabAction>
+        <FabAction modifier="text">Button C</FabAction>
+      </Fab>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Fab>
+      <FabTrigger color="primary">F</FabTrigger>
+      <FabAction modifier="text">Button A</FabAction>
+      <FabAction modifier="text">Button B</FabAction>
+      <FabAction modifier="text">Button C</FabAction>
+    </Fab>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### With close button
+
+**`FabClose`** for the label row; **`FabMark`** for the ✕ ([Button](/docs/components/actions/button) props).
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="fab-preview flex gap-2 justify-center not-content min-h-48 items-end pb-4">
+      <Fab>
+        <FabTrigger color="info">F</FabTrigger>
+        <FabClose>
+          Close{' '}
+          <FabMark color="error" modifier="circle" size="lg">
+            ✕
+          </FabMark>
+        </FabClose>
+        <FabAction label="Label A">
+          A
+        </FabAction>
+        <FabAction label="Label B">
+          B
+        </FabAction>
+        <FabAction label="Label C">
+          C
+        </FabAction>
+      </Fab>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Fab>
+      <FabTrigger color="info">F</FabTrigger>
+      <FabClose>
+        Close{' '}
+        <FabMark color="error" modifier="circle" size="lg">
+          ✕
+        </FabMark>
+      </FabClose>
+      <FabAction label="Label A">
+        A
+      </FabAction>
+      <FabAction label="Label B">
+        B
+      </FabAction>
+      <FabAction label="Label C">
+        C
+      </FabAction>
+    </Fab>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### With main action
+
+Instead of **`FabClose`**, use **`FabMainAction`** for the center row.
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="fab-preview flex gap-2 justify-center not-content min-h-48 items-end pb-4">
+      <Fab>
+        <FabTrigger color="primary">F</FabTrigger>
+        <FabMainAction>
+          Main Action{' '}
+          <Button color="secondary" modifier="circle" size="lg">
+            M
+          </Button>
+        </FabMainAction>
+        <FabAction label="Label A">
+          A
+        </FabAction>
+        <FabAction label="Label B">
+          B
+        </FabAction>
+        <FabAction label="Label C">
+          C
+        </FabAction>
+      </Fab>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    ---
+    import Fab from '@/components/fab/Fab.astro';
+    import FabTrigger from '@/components/fab/FabTrigger.astro';
+    import FabAction from '@/components/fab/FabAction.astro';
+    import FabMainAction from '@/components/fab/FabMainAction.astro';
+    import Button from '@/components/Button.astro';
+    ---
+
+    <Fab>
+      <FabTrigger color="primary">F</FabTrigger>
+      <FabMainAction>
+        Main Action{' '}
+        <Button color="secondary" modifier="circle" size="lg">
+          M
+        </Button>
+      </FabMainAction>
+      <FabAction label="Label A">
+        A
+      </FabAction>
+      <FabAction label="Label B">
+        B
+      </FabAction>
+      <FabAction label="Label C">
+        C
+      </FabAction>
+    </Fab>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### Single FAB
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="fab-preview flex gap-2 justify-center not-content min-h-32 items-end pb-4">
+      <Fab variant="single" color="primary">
+        <span>F</span>
+      </Fab>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Fab variant="single" color="primary">
+      <span>F</span>
+    </Fab>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### Flower
+
+**`flower`** on **`Fab`**. Center: **`FabMainAction`** + **`asButton`**. Up to four **`FabAction`**s.
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="fab-preview flex gap-2 justify-center not-content min-h-64 items-end pb-4">
+      <Fab flower>
+        <FabTrigger color="success">F</FabTrigger>
+        <FabMainAction asButton modifier="circle" color="neutral">
+          <span>M</span>
+        </FabMainAction>
+        <FabAction>A</FabAction>
+        <FabAction>B</FabAction>
+        <FabAction>C</FabAction>
+        <FabAction>D</FabAction>
+      </Fab>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Fab flower>
+      <FabTrigger color="success">F</FabTrigger>
+      <FabMainAction asButton modifier="circle" color="neutral">
+        <span>M</span>
+      </FabMainAction>
+      <FabAction>A</FabAction>
+      <FabAction>B</FabAction>
+      <FabAction>C</FabAction>
+      <FabAction>D</FabAction>
+    </Fab>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### Flower + tooltips
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="fab-preview flex gap-2 justify-center not-content min-h-64 items-end pb-4">
+      <Fab flower>
+        <FabTrigger color="info">F</FabTrigger>
+        <FabMainAction asButton modifier="circle" color="success">
+          <span>M</span>
+        </FabMainAction>
+        <div class="tooltip tooltip-left" data-tip="Label A">
+          <FabAction>A</FabAction>
+        </div>
+        <div class="tooltip tooltip-left" data-tip="Label B">
+          <FabAction>B</FabAction>
+        </div>
+        <div class="tooltip" data-tip="Label C">
+          <FabAction>C</FabAction>
+        </div>
+        <div class="tooltip" data-tip="Label D">
+          <FabAction>D</FabAction>
+        </div>
+      </Fab>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Fab flower>
+      <FabTrigger color="info">F</FabTrigger>
+      <FabMainAction asButton modifier="circle" color="success">
+        <span>M</span>
+      </FabMainAction>
+      <div class="tooltip tooltip-left" data-tip="Label A">
+        <FabAction>A</FabAction>
+      </div>
+      <div class="tooltip tooltip-left" data-tip="Label B">
+        <FabAction>B</FabAction>
+      </div>
+      <div class="tooltip" data-tip="Label C">
+        <FabAction>C</FabAction>
+      </div>
+      <div class="tooltip" data-tip="Label D">
+        <FabAction>D</FabAction>
+      </div>
+    </Fab>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>

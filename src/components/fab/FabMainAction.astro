@@ -1,0 +1,54 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { tv, type VariantProps } from 'tailwind-variants';
+import { button } from '../Button.astro';
+
+interface Props
+  extends Omit<
+      HTMLAttributes<'div'>,
+      'class' | 'color' | 'style' | 'size' | 'modifier'
+    >,
+    VariantProps<typeof button> {
+  asButton?: boolean;
+  class?: string;
+}
+
+const mainActionButton = tv({
+  extend: button,
+  base: 'fab-main-action',
+  defaultVariants: {
+    size: 'lg',
+    modifier: 'circle',
+  },
+});
+
+const fabMainActionWrap = tv({
+  base: 'fab-main-action',
+});
+
+const {
+  asButton = false,
+  color,
+  style,
+  size,
+  modifier,
+  class: className,
+  ...rest
+} = Astro.props;
+---
+
+{
+  asButton ? (
+    <button
+      {...rest}
+      type="button"
+      class={mainActionButton({ color, style, size, modifier, class: className })}
+    >
+      <slot />
+    </button>
+  ) : (
+    <div class={fabMainActionWrap({ class: className })} {...rest}>
+      <slot />
+    </div>
+  )
+}

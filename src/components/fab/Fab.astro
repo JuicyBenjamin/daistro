@@ -1,0 +1,63 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { tv, type VariantProps } from 'tailwind-variants';
+import { button } from '../Button.astro';
+import Button from '../Button.astro';
+
+interface Props
+  extends Omit<
+      HTMLAttributes<'div'>,
+      'color' | 'style' | 'size' | 'modifier'
+    >,
+    VariantProps<typeof button> {
+  variant?: 'speedDial' | 'single';
+  flower?: boolean;
+  class?: string;
+  /** `variant="single"` only — merged into the inner `<Button>` */
+  triggerClass?: string;
+}
+
+const fabRoot = tv({
+  base: 'fab',
+  variants: {
+    flower: {
+      true: 'fab-flower',
+      false: '',
+    },
+  },
+  defaultVariants: {
+    flower: false,
+  },
+});
+
+const {
+  variant = 'speedDial',
+  flower = false,
+  color = 'primary',
+  style,
+  size = 'lg',
+  modifier = 'circle',
+  class: className,
+  triggerClass,
+  ...rest
+} = Astro.props;
+---
+
+<div class={fabRoot({ flower, class: className })}>
+  {
+    variant === 'single' ? (
+      <Button
+        color={color}
+        style={style}
+        size={size}
+        modifier={modifier}
+        class={triggerClass}
+        {...rest}
+      >
+        <slot />
+      </Button>
+    ) : (
+      <slot />
+    )
+  }
+</div>

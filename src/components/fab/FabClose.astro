@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { tv } from 'tailwind-variants';
+
+interface Props extends Omit<HTMLAttributes<'div'>, 'class'> {
+  class?: string;
+}
+
+const fabClose = tv({
+  base: 'fab-close',
+});
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div class={fabClose({ class: className })} {...rest}>
+  <slot />
+</div>

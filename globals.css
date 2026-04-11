@@ -1,2 +1,13 @@
 @import 'tailwindcss';
 @plugin "daisyui";
+
+/* Docs previews: daisyUI .fab is position:fixed (viewport). Contain demos inside the preview box. */
+.fab-preview {
+  position: relative;
+  isolation: isolate;
+}
+.fab-preview .fab {
+  position: absolute !important;
+  inset-inline-end: 1rem;
+  bottom: 1rem;
+}
