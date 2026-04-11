@@ -1,19 +1,18 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import { tv } from 'tailwind-variants';
 
 interface Props extends HTMLAttributes<'button'> {}
+
+const modalClose = tv({
+  base: 'btn btn-sm btn-circle btn-ghost absolute right-2 top-2',
+});
 
 const { class: className, ...rest } = Astro.props;
 ---
 
 <form data-slot="modal-close" method="dialog">
-  <button
-    class:list={[
-      'btn btn-sm btn-circle btn-ghost absolute right-2 top-2',
-      className,
-    ]}
-    {...rest}
-  >
+  <button class={modalClose({ class: className })} {...rest}>
     <slot>✕</slot>
   </button>
 </form>

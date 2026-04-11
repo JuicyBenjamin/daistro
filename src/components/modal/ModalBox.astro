@@ -1,11 +1,16 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import { tv } from 'tailwind-variants';
 
 interface Props extends HTMLAttributes<'div'> {}
+
+const modalBox = tv({
+  base: 'modal-box',
+});
 
 const { class: className, ...rest } = Astro.props;
 ---
 
-<div data-slot="modal-box" class:list={['modal-box', className]} {...rest}>
+<div data-slot="modal-box" class={modalBox({ class: className })} {...rest}>
   <slot />
 </div>

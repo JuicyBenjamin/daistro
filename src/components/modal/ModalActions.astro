@@ -1,12 +1,17 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import { tv } from 'tailwind-variants';
 
 interface Props extends HTMLAttributes<'div'> {}
+
+const modalActions = tv({
+  base: 'modal-action',
+});
 
 const { class: className, ...rest } = Astro.props;
 ---
 
-<div data-slot="modal-action" class:list={['modal-action', className]} {...rest}>
+<div data-slot="modal-action" class={modalActions({ class: className })} {...rest}>
   <form method="dialog">
     <slot />
   </form>
