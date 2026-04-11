@@ -1,0 +1,283 @@
+---
+title: 'Modal'
+description: 'Dialog modal using the native HTML dialog element, matching daisyUI modal patterns.'
+---
+
+import Modal from '@/components/modal/Modal.astro';
+import ModalBox from '@/components/modal/ModalBox.astro';
+import ModalActions from '@/components/modal/ModalActions.astro';
+import ModalClose from '@/components/modal/ModalClose.astro';
+import Button from '@/components/Button.astro';
+import { Code } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+[daisyUI Modal](https://daisyui.com/components/modal/) — native `<dialog>`. Open with `id.showModal()`, close with Esc, click outside, or buttons inside the modal. Order of children doesn't matter — they get placed correctly.
+
+- **`Modal`** — Root `<dialog>`. Required `id`. Optional `placement` (`top` / `middle` / `bottom`), `alignment` (`start` / `end`), `responsive`. Backdrop + close-on-click-outside by default. **`noBackdrop`** hides the backdrop (click outside still closes). **`closeOnClickOutside={false}`** disables click-to-close. Combine both to get no backdrop and no click-to-close.
+- **`ModalBox`** — Content container. Pass `class` for custom width.
+- **`ModalActions`** — Footer row. Buttons inside auto-close the modal.
+- **`ModalClose`** — Corner ✕ button. Override content via slot.
+
+### Basic
+
+Backdrop is built in — clicking outside closes the modal.
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="flex gap-2 justify-center not-content">
+      <Button onclick="modal_basic.showModal()">Open modal</Button>
+      <Modal id="modal_basic">
+        <ModalBox>
+          <h3 class="text-lg font-bold">Hello!</h3>
+          <p class="py-4">Press Esc, click outside, or click Close.</p>
+          <ModalActions>
+            <Button>Close</Button>
+          </ModalActions>
+        </ModalBox>
+      </Modal>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Button onclick="modal_basic.showModal()">Open modal</Button>
+    <Modal id="modal_basic">
+      <ModalBox>
+        <h3 class="text-lg font-bold">Hello!</h3>
+        <p class="py-4">Press Esc, click outside, or click Close.</p>
+        <ModalActions>
+          <Button>Close</Button>
+        </ModalActions>
+      </ModalBox>
+    </Modal>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### Confirmation
+
+Multiple action buttons for yes/no prompts.
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="flex gap-2 justify-center not-content">
+      <Button onclick="modal_confirm.showModal()">Delete item</Button>
+      <Modal id="modal_confirm">
+        <ModalBox>
+          <h3 class="text-lg font-bold">Are you sure?</h3>
+          <p class="py-4">This action cannot be undone.</p>
+          <ModalActions>
+            <Button color="ghost">Cancel</Button>
+            <Button color="error">Delete</Button>
+          </ModalActions>
+        </ModalBox>
+      </Modal>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Button onclick="modal_confirm.showModal()">Delete item</Button>
+    <Modal id="modal_confirm">
+      <ModalBox>
+        <h3 class="text-lg font-bold">Are you sure?</h3>
+        <p class="py-4">This action cannot be undone.</p>
+        <ModalActions>
+          <Button color="ghost">Cancel</Button>
+          <Button color="error">Delete</Button>
+        </ModalActions>
+      </ModalBox>
+    </Modal>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### Corner close button
+
+**`ModalClose`** renders a ✕ in the top-right corner.
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="flex gap-2 justify-center not-content">
+      <Button onclick="modal_corner.showModal()">Open modal</Button>
+      <Modal id="modal_corner">
+        <ModalClose />
+        <ModalBox>
+          <h3 class="text-lg font-bold">Hello!</h3>
+          <p class="py-4">Press Esc, click outside, or click ✕.</p>
+        </ModalBox>
+      </Modal>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Button onclick="modal_corner.showModal()">Open modal</Button>
+    <Modal id="modal_corner">
+      <ModalClose />
+      <ModalBox>
+        <h3 class="text-lg font-bold">Hello!</h3>
+        <p class="py-4">Press Esc, click outside, or click ✕.</p>
+      </ModalBox>
+    </Modal>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### Persistent (no close on click outside)
+
+**`closeOnClickOutside={false}`** — backdrop still visible, but clicking it won't dismiss.
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="flex gap-2 justify-center not-content">
+      <Button onclick="modal_persistent.showModal()">Open modal</Button>
+      <Modal id="modal_persistent" closeOnClickOutside={false}>
+        <ModalBox>
+          <h3 class="text-lg font-bold">Hello!</h3>
+          <p class="py-4">Clicking outside won't close. Press Esc or click Close.</p>
+          <ModalActions>
+            <Button>Close</Button>
+          </ModalActions>
+        </ModalBox>
+      </Modal>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Button onclick="modal_persistent.showModal()">Open modal</Button>
+    <Modal id="modal_persistent" closeOnClickOutside={false}>
+      <ModalBox>
+        <h3 class="text-lg font-bold">Hello!</h3>
+        <p class="py-4">Clicking outside won't close. Press Esc or click Close.</p>
+        <ModalActions>
+          <Button>Close</Button>
+        </ModalActions>
+      </ModalBox>
+    </Modal>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### No backdrop
+
+**`noBackdrop`** — no overlay, but clicking outside still closes.
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="flex gap-2 justify-center not-content">
+      <Button onclick="modal_nobackdrop.showModal()">Open modal</Button>
+      <Modal id="modal_nobackdrop" noBackdrop>
+        <ModalBox>
+          <h3 class="text-lg font-bold">Hello!</h3>
+          <p class="py-4">No backdrop. Click outside, press Esc, or click Close.</p>
+          <ModalActions>
+            <Button>Close</Button>
+          </ModalActions>
+        </ModalBox>
+      </Modal>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Button onclick="modal_nobackdrop.showModal()">Open modal</Button>
+    <Modal id="modal_nobackdrop" noBackdrop>
+      <ModalBox>
+        <h3 class="text-lg font-bold">Hello!</h3>
+        <p class="py-4">No backdrop. Click outside, press Esc, or click Close.</p>
+        <ModalActions>
+          <Button>Close</Button>
+        </ModalActions>
+      </ModalBox>
+    </Modal>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### Custom width
+
+Pass utility classes on **`ModalBox`**.
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="flex gap-2 justify-center not-content">
+      <Button onclick="modal_wide.showModal()">Open wide modal</Button>
+      <Modal id="modal_wide">
+        <ModalBox class="w-11/12 max-w-5xl">
+          <h3 class="text-lg font-bold">Wide modal</h3>
+          <p class="py-4">Custom width classes on ModalBox.</p>
+          <ModalActions>
+            <Button>Close</Button>
+          </ModalActions>
+        </ModalBox>
+      </Modal>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Button onclick="modal_wide.showModal()">Open wide modal</Button>
+    <Modal id="modal_wide">
+      <ModalBox class="w-11/12 max-w-5xl">
+        <h3 class="text-lg font-bold">Wide modal</h3>
+        <p class="py-4">Custom width classes on ModalBox.</p>
+        <ModalActions>
+          <Button>Close</Button>
+        </ModalActions>
+      </ModalBox>
+    </Modal>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>
+
+### Responsive
+
+**`responsive`** — bottom sheet on mobile, centered on sm+.
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="flex gap-2 justify-center not-content">
+      <Button onclick="modal_responsive.showModal()">Open modal</Button>
+      <Modal id="modal_responsive" responsive>
+        <ModalBox>
+          <h3 class="text-lg font-bold">Responsive modal</h3>
+          <p class="py-4">Bottom on small screens, centered on larger.</p>
+          <ModalActions>
+            <Button>Close</Button>
+          </ModalActions>
+        </ModalBox>
+      </Modal>
+    </div>
+  </TabItem>
+  <TabItem label="code">
+    <Code
+      code={`
+    <Button onclick="modal_responsive.showModal()">Open modal</Button>
+    <Modal id="modal_responsive" responsive>
+      <ModalBox>
+        <h3 class="text-lg font-bold">Responsive modal</h3>
+        <p class="py-4">Bottom on small screens, centered on larger.</p>
+        <ModalActions>
+          <Button>Close</Button>
+        </ModalActions>
+      </ModalBox>
+    </Modal>
+    `}
+      lang="astro"
+    />
+  </TabItem>
+</Tabs>

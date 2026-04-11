@@ -1,0 +1,82 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { tv, type VariantProps } from 'tailwind-variants';
+import { parseHTML } from 'linkedom';
+
+interface Props
+  extends Omit<HTMLAttributes<'dialog'>, 'placement'>,
+    VariantProps<typeof modal> {
+  id: string;
+  /** Backdrop still visible but clicking it won't close the modal */
+  closeOnClickOutside?: boolean;
+  /** Remove the backdrop entirely */
+  noBackdrop?: boolean;
+}
+
+const modal = tv({
+  base: 'modal',
+  variants: {
+    placement: {
+      top: 'modal-top',
+      middle: 'modal-middle',
+      bottom: 'modal-bottom',
+    },
+    alignment: {
+      start: 'modal-start',
+      end: 'modal-end',
+    },
+    responsive: {
+      true: 'modal-bottom sm:modal-middle',
+    },
+    noBackdrop: {
+      true: 'modal-no-backdrop',
+    },
+  },
+});
+
+const {
+  id,
+  placement,
+  alignment,
+  responsive,
+  closeOnClickOutside = true,
+  noBackdrop = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const raw = await Astro.slots.render('default');
+const { document } = parseHTML(raw);
+
+const boxEl = document.querySelector('[data-slot="modal-box"]');
+const closeEl = document.querySelector('[data-slot="modal-close"]');
+const actionEl = document.querySelector('[data-slot="modal-action"]');
+
+if (boxEl) {
+  if (closeEl) {
+    closeEl.removeAttribute('data-slot');
+    boxEl.insertBefore(closeEl, boxEl.firstChild);
+  }
+  if (actionEl) {
+    actionEl.removeAttribute('data-slot');
+    boxEl.appendChild(actionEl);
+  }
+  boxEl.removeAttribute('data-slot');
+}
+
+const boxHTML = boxEl?.outerHTML ?? '';
+const backdropHTML = closeOnClickOutside
+  ? '<form method="dialog" class="modal-backdrop"><button>close</button></form>'
+  : noBackdrop
+    ? ''
+    : '<div class="modal-backdrop"></div>';
+---
+
+<dialog
+  id={id}
+  class={modal({ placement, alignment, responsive, noBackdrop, class: className })}
+  {...rest}
+>
+  <Fragment set:html={boxHTML} />
+  <Fragment set:html={backdropHTML} />
+</dialog>

@@ -39,6 +39,7 @@ export default defineConfig({
                 { label: 'Button', slug: 'components/actions/button' },
                 { label: 'Dropdown', slug: 'components/actions/dropdown' },
                 { label: 'Fab', slug: 'components/actions/fab' },
+                { label: 'Modal', slug: 'components/actions/modal' },
               ],
             },
           ],

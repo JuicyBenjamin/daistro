@@ -11,3 +11,7 @@
   inset-inline-end: 1rem;
   bottom: 1rem;
 }
+
+.modal-no-backdrop {
+  background-color: transparent !important;
+}

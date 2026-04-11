@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div data-slot="modal-action" class:list={['modal-action', className]} {...rest}>
+  <form method="dialog">
+    <slot />
+  </form>
+</div>
